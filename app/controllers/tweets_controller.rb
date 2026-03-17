@@ -1,10 +1,10 @@
 class TweetsController < ApplicationController
+  before_action :set_tweet, only: %i[ show edit update ]
   def index
     @tweets = Tweet.all
   end
 
   def show
-    @tweet = Tweet.find(params[:id])
   end
 
   def new
@@ -21,11 +21,9 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = Tweet.find(params[:id])
   end
 
   def update
-    @tweet = Tweet.find(params[:id])
     if @tweet.update(tweet_params)
       redirect_to @tweet
     else
@@ -34,6 +32,9 @@ class TweetsController < ApplicationController
   end
 
   private
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
+  end
   def tweet_params
     params.expect(tweet: [ :body ])
   end
