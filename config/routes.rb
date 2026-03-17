@@ -13,18 +13,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "tweets#index"
 
-  get "/tweets", to: "tweets#index"
-
-  get "/tweets/new", to: "tweets#new"
-  post "/tweets", to: "tweets#create"
-
-  get "/tweets/:id", to: "tweets#show"
-
-  get "/tweets/:id/edit", to: "tweets#edit"
-  patch "/tweets/:id", to: "tweets#update"
-  put "/tweets/:id", to: "tweets#update"
-
-  delete "/tweets/:id", to: "tweets#destroy"
-
-  # resources :tweets
+  resources :tweets
 end
