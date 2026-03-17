@@ -3,9 +3,7 @@
 <div id="tweets">
   <% @tweets.each do |tweet| %>
     <div>
-      <a href="/tweets/<%= tweet.id %>">
-        <%= tweet.body %>
-      </a>
+      <%= link_to tweet.body, tweet_path(tweet.id) %>
     </div>
   <% end %>
 </div>
