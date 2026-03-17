@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   put "/tweets/:id", to: "tweets#update"
 
   delete "/tweets/:id", to: "tweets#destroy"
+
+  # resources :tweets
 end
