@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[ show edit update ]
+  before_action :set_tweet, only: %i[ show edit update destroy ]
   def index
     @tweets = Tweet.all
   end
@@ -29,6 +29,11 @@ class TweetsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @tweet.destroy
+    redirect_to tweets_path
   end
 
   private
