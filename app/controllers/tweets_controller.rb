@@ -1,11 +1,10 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[ show edit update destroy ]
+  before_action :set_tweet, only: %i[show edit update destroy]
   def index
     @tweets = Tweet.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @tweet = Tweet.new
@@ -20,8 +19,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @tweet.update(tweet_params)
@@ -37,10 +35,12 @@ class TweetsController < ApplicationController
   end
 
   private
+
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end
+
   def tweet_params
-    params.expect(tweet: [ :body ])
+    params.expect(tweet: [:body])
   end
 end
