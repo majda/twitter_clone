@@ -1,5 +1,6 @@
 <h1>Tweets</h1>
 
+<%= link_to "Login", new_session_path unless authenticated? %>
 <%= link_to "New tweet", new_tweet_path if authenticated? %>
 
 <div id="tweets">
