@@ -1,5 +1,7 @@
 <h1><%= @tweet.body %></h1>
 
 <%= link_to "Back", tweets_path %>
-<%= link_to "Edit", edit_tweet_path(@tweet) %>
-<%= button_to "Delete", @tweet, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<% if authenticated? %>
+  <%= link_to "Edit", edit_tweet_path(@tweet) %>
+  <%= button_to "Delete", @tweet, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<% end %>
