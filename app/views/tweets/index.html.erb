@@ -1,0 +1,11 @@
+<h1>Tweets</h1>
+
+<%= link_to "New tweet", new_tweet_path %>
+
+<div id="tweets">
+  <% @tweets.each do |tweet| %>
+    <div>
+      <%= link_to tweet.body, tweet_path(tweet.id) %>
+    </div>
+  <% end %>
+</div>
