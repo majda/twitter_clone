@@ -9,4 +9,6 @@
 #
 # See https://docs.rubocop.org/rubocop/configuration
 
-{}
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
