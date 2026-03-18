@@ -1,6 +1,6 @@
 <h1>Tweets</h1>
 
-<%= link_to "New tweet", new_tweet_path %>
+<%= link_to "New tweet", new_tweet_path if authenticated? %>
 
 <div id="tweets">
   <% @tweets.each do |tweet| %>
