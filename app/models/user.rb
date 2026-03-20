@@ -8,4 +8,6 @@ class User < ApplicationRecord
   has_many :tweets
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+  validates :email_address, :name, presence: { message: 'must be given please' }
+  validates :email_address, uniqueness: { message: 'is already in use' }
 end
