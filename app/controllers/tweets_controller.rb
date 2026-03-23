@@ -54,6 +54,6 @@ class TweetsController < ApplicationController
   def authorise_tweet_owner
     return if @tweet.user_id == Current.user.id
 
-    redirect_to tweets_path, alert: 'You can only edit or delete your own tweets'
+    redirect_to tweets_path
   end
 end
