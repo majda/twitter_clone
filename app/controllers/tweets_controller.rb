@@ -17,6 +17,7 @@ class TweetsController < ApplicationController
   end
 
   def create
+    # Associate the new tweet with the signed-in user (user_id is not taken from params)
     @tweet = Current.user.tweets.build(tweet_params)
     if @tweet.save
       redirect_to @tweet
