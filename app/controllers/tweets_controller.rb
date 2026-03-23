@@ -5,6 +5,7 @@
 class TweetsController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
   before_action :set_tweet, only: %i[show edit update destroy]
+  before_action :authorise_tweet_owner, only: %i[edit update destroy]
   def index
     @tweets = Tweet.includes(:user).order(created_at: :desc)
   end
@@ -47,5 +48,11 @@ class TweetsController < ApplicationController
 
   def tweet_params
     params.expect(tweet: [:body])
+  end
+
+  def authorise_tweet_owner
+    return if @tweet.user_id == Current.user.id
+
+    redirect_to tweets_path, alert: 'You can only edit or delete your own tweets'
   end
 end

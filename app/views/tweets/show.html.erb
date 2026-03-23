@@ -2,7 +2,7 @@
 <p>Created by <%= @tweet.user.name %></p>
 
 <%= link_to "Back", tweets_path %>
-<% if authenticated? %>
+<% if authenticated? && Current.user&.id == @tweet.user_id %>
   <%= link_to "Edit", edit_tweet_path(@tweet) %>
   <%= button_to "Delete", @tweet, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
 <% end %>
