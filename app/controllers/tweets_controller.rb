@@ -6,7 +6,6 @@ class TweetsController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
   before_action :set_tweet, only: %i[show edit update destroy]
   def index
-    # @tweets = Tweet.all
     @tweets = Tweet.includes(:user).order(created_at: :desc)
   end
 
