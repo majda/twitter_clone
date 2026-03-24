@@ -3,6 +3,8 @@
 #
 # Handles listing, creating, updating, and deleting tweets.
 class TweetsController < ApplicationController
+  include TweetsHelper
+
   allow_unauthenticated_access only: %i[index show]
   before_action :set_tweet, only: %i[show edit update destroy]
   before_action :authorise_tweet_owner, only: %i[edit update destroy]
