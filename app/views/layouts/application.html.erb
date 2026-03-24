@@ -25,6 +25,14 @@
   <body>
     <nav>
       <%= link_to "Home", root_path %>
+      <p>
+        <%= "Hello " + Current.user.name if authenticated? %>
+        <% if authenticated? && !(controller_name == 'users' && action_name == 'edit') %>
+          <%= link_to "Update", edit_user_path(Current.user.id) %>
+        <% end %>
+      </p>
+
+
       <%= button_to "Log out", session_path, method: :delete if authenticated? %>
     </nav>
     <main>
