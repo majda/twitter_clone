@@ -1,0 +1,21 @@
+<h1>Update user</h1>
+
+<%= form_with model: @user do |form| %>
+  <% if form.object.errors.any? %>
+    <p class="error"><%= form.object.errors.full_messages.first %></p>
+  <% end %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :email_address %>
+    <%= form.text_field :email_address %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+  <%= link_to "Cancel", root_path %>
+<% end %>
