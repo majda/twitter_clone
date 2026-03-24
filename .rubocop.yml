@@ -12,3 +12,6 @@
 AllCops:
   SuggestExtensions: false
   NewCops: enable
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
