@@ -13,5 +13,31 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TweetsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#tweet_created_by_current_user?' do
+    let(:current_user) do
+      User.create!(
+        email_address: 'current@example.com',
+        password: 'password123',
+        name: 'Current'
+      )
+    end
+    let(:session) { Session.create!(user: current_user) }
+    around do |example|
+      Current.session = session
+      example.run
+    ensure
+      Current.reset
+    end
+    it 'returns true when user_id matches the current user' do
+      expect(helper.tweet_created_by_current_user?(current_user.id)).to be true
+    end
+    it 'returns false when user_id does not match the current user' do
+      other = User.create!(
+        email_address: 'other@example.com',
+        password: 'password123',
+        name: 'Other'
+      )
+      expect(helper.tweet_created_by_current_user?(other.id)).to be false
+    end
+  end
 end

@@ -7,6 +7,8 @@
   <% @tweets.each do |tweet| %>
     <div>
       <%= link_to tweet.body, tweet_path(tweet.id) %>
+      by
+      <%= tweet.user.name %>
     </div>
   <% end %>
 </div>
