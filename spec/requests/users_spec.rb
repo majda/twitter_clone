@@ -23,25 +23,46 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'edit' do
-    it 'shows the form when signed in as that user' do
-      sign_in(user)
-      get edit_user_path(user)
-      expect(response).to have_http_status(:success)
+    context 'when signed in as that user' do
+      it 'shows the form' do
+        sign_in(user)
+        get edit_user_path(user)
+        expect(response).to have_http_status(:success)
+      end
     end
 
-    it 'does not show another users form' do
-      sign_in(user)
-      get edit_user_path(other_user)
-      expect(response).to redirect_to(root_path)
+    context 'when not signed in' do
+      it 'redirects to root' do
+        get edit_user_path(user)
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
+
+    context 'when signes as a different user' do
+      it 'redirects to root' do
+        sign_in(user)
+        get edit_user_path(other_user)
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
   describe 'update' do
-    it 'updates when signed is as that user' do
-      sign_in(user)
-      patch user_path(user), params: { user: { name: 'Updated name', email_address: user.email_address } }
-      expect(response).to redirect_to(edit_user_path(user))
-      expect(user.reload.name).to eq('Updated name')
+    context 'when signed is as that user' do
+      it 'updates that user data' do
+        sign_in(user)
+        patch user_path(user), params: { user: { name: 'Updated name', email_address: user.email_address } }
+        expect(response).to redirect_to(edit_user_path(user))
+        expect(user.reload.name).to eq('Updated name')
+      end
+    end
+
+    context 'when signed in as a different user' do
+      it 'redirects to root' do
+        sign_in(user)
+        patch user_path(other_user), params: { user: { name: 'Updated name', email_address: other_user.email_address } }
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end
