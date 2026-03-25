@@ -2,7 +2,11 @@
 
 <%= form_with model: @user do |form| %>
   <% if form.object.errors.any? %>
-    <p class="error"><%= form.object.errors.full_messages.first %></p>
+    <ul>
+      <% form.object.errors.full_messages.each do |message| %>
+        <li class="error"><%= message %></li>
+      <% end %>
+    </ul>
   <% end %>
 
   <div>
