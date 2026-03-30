@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
     # Associate the new tweet with the signed-in user (user_id is not taken from params)
     @tweet = Current.user.tweets.build(tweet_params)
     if @tweet.save
-      redirect_to @tweet
+      redirect_to @tweet, notice: 'Tweet created successfully'
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class TweetsController < ApplicationController
 
   def update
     if @tweet.update(tweet_params)
-      redirect_to @tweet
+      redirect_to @tweet, notice: 'Changes have been saved successfully'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class TweetsController < ApplicationController
 
   def destroy
     @tweet.destroy
-    redirect_to tweets_path
+    redirect_to tweets_path, notice: 'Tweet has been deleted successfully'
   end
 
   private
