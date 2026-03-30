@@ -25,6 +25,16 @@
   <body>
     <nav>
       <%= link_to "Home", root_path %>
+      <p>
+        <%= "Hello " + Current.user.name if authenticated? %>
+        <% if authenticated? %>
+          <%= link_to_unless_current("Update", edit_user_path(Current.user)) do %>
+            <%= link_to "Back", root_path %>
+          <% end %>
+        <% end %>
+      </p>
+
+
       <%= button_to "Log out", session_path, method: :delete if authenticated? %>
     </nav>
     <main>
